@@ -3,6 +3,7 @@
 const secretNum = Math.floor(Math.random() * 11);
 
 let score = 10;
+let highscore = 0;
 
 function won() {
   document.querySelector('body').style.backgroundColor = 'green';
@@ -32,6 +33,11 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent = 'YOU GOT IT!!';
     document.querySelector('.number').textContent = secretNum;
     won();
+
+    if (score > highscore) {
+      highscore = score;
+      document.querySelector('.highscore').textContent = highscore;
+    }
   } else if (guess > secretNum) {
     if (score > 1) {
       document.querySelector('.message').textContent = 'TOO HIGH 🤘';
