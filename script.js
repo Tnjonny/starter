@@ -25,6 +25,9 @@ document.querySelector('.check').addEventListener('click', function () {
 
   if (!guess) {
     document.querySelector('.message').textContent = 'NO NO.';
+  } else if (guess > 10 || guess < 1) {
+    document.querySelector('.message').textContent =
+      'GUESS HAS TO BE BETWEEN 1 & 10';
   } else if (guess === secretNum) {
     document.querySelector('.message').textContent = 'YOU GOT IT!!';
     document.querySelector('.number').textContent = secretNum;
