@@ -1,9 +1,21 @@
 'use strict';
 
-const secretNum = Math.floor(Math.random() * 11);
+let secretNum = Math.floor(Math.random() * 11);
 
 let score = 10;
 let highscore = 0;
+
+function high() {
+  document.querySelector('.message').textContent = 'TOO HIGH 🤘';
+  score--;
+  document.querySelector('.score').textContent = score;
+}
+
+function low() {
+  document.querySelector('.message').textContent = 'TOO LOW👇';
+  score--;
+  document.querySelector('.score').textContent = score;
+}
 
 function won() {
   document.querySelector('.message').textContent = 'YOU GOT IT!!';
@@ -13,8 +25,8 @@ function won() {
 
 function lost() {
   document.querySelector('.message').textContent = 'YOU LOST 💀';
-  document.querySelector('.score').textContent = 0;
   document.querySelector('body').style.backgroundColor = 'red';
+  document.querySelector('.score').textContent = 0;
 }
 
 function retore() {
@@ -23,7 +35,13 @@ function retore() {
   document.querySelector('.message').textContent = 'Start guessing...';
   document.querySelector('.score').textContent = 10;
   document.querySelector('.guess').value = '';
+  location.reload();
+  secretNum = Math.floor(Math.random() * 11);
 }
+
+document.querySelector('.again').addEventListener('click', function () {
+  retore();
+});
 
 document.querySelector('.check').addEventListener('click', function () {
   const guess = Number(document.querySelector('.guess').value);
@@ -35,30 +53,17 @@ document.querySelector('.check').addEventListener('click', function () {
       'GUESS HAS TO BE BETWEEN 1 & 10';
   } else if (guess === secretNum) {
     won();
-
-    if (score > highscore) {
-      highscore = score;
-      document.querySelector('.highscore').textContent = highscore;
-    }
   } else if (guess > secretNum) {
     if (score > 1) {
-      document.querySelector('.message').textContent = 'TOO HIGH 🤘';
-      score--;
-      document.querySelector('.score').textContent = score;
+      high();
     } else {
       lost();
     }
   } else if (guess < secretNum) {
     if (score > 1) {
-      document.querySelector('.message').textContent = 'TOO LOW👇';
-      score--;
-      document.querySelector('.score').textContent = score;
+      low();
     } else {
       lost();
     }
   }
-});
-
-document.querySelector('.again').addEventListener('click', function () {
-  retore();
 });
