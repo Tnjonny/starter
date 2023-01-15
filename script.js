@@ -6,10 +6,14 @@ let score = 10;
 let highscore = 0;
 
 function won() {
+  document.querySelector('.message').textContent = 'YOU GOT IT!!';
+  document.querySelector('.number').textContent = secretNum;
   document.querySelector('body').style.backgroundColor = 'green';
 }
 
 function lost() {
+  document.querySelector('.message').textContent = 'YOU LOST 💀';
+  document.querySelector('.score').textContent = 0;
   document.querySelector('body').style.backgroundColor = 'red';
 }
 
@@ -30,8 +34,6 @@ document.querySelector('.check').addEventListener('click', function () {
     document.querySelector('.message').textContent =
       'GUESS HAS TO BE BETWEEN 1 & 10';
   } else if (guess === secretNum) {
-    document.querySelector('.message').textContent = 'YOU GOT IT!!';
-    document.querySelector('.number').textContent = secretNum;
     won();
 
     if (score > highscore) {
@@ -44,8 +46,6 @@ document.querySelector('.check').addEventListener('click', function () {
       score--;
       document.querySelector('.score').textContent = score;
     } else {
-      document.querySelector('.message').textContent = 'YOU LOST 💀';
-      document.querySelector('.score').textContent = 0;
       lost();
     }
   } else if (guess < secretNum) {
@@ -54,8 +54,6 @@ document.querySelector('.check').addEventListener('click', function () {
       score--;
       document.querySelector('.score').textContent = score;
     } else {
-      document.querySelector('.message').textContent = 'YOU LOST 💀';
-      document.querySelector('.score').textContent = 0;
       lost();
     }
   }
